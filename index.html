@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Amazing Best Friend</title>
+    <style>
+      /* Base Styles with Enhanced Responsiveness */
+      :root {
+        --purple-dark: #581c87;
+        --purple-medium: #7e22ce;
+        --purple-light: #f3e8ff;
+        --pink-light: #fdf2f8;
+        --gray-dark: #374151;
+        --gray-medium: #9ca3af;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(
+          to bottom right,
+          var(--pink-light),
+          var(--purple-light)
+        );
+        padding: 1rem;
+        position: relative;
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+
+      /* Responsive Container */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 20;
+        padding: 0 1rem;
+      }
+
+      /* Responsive Header */
+      header {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 0 0.5rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+        font-weight: 700;
+        color: var(--purple-dark);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        font-size: clamp(1rem, 2.5vw, 1.125rem);
+        color: var(--purple-medium);
+      }
+
+      /* Responsive Photo Gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .gallery-item {
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        aspect-ratio: 1 / 1; /* Square ratio */
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Responsive Letter Section */
+      .letter {
+        background: white;
+        padding: clamp(1rem, 3vw, 2rem);
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+      }
+
+      .letter h2 {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        font-weight: 700;
+        color: var(--purple-dark);
+        margin-bottom: 1rem;
+      }
+
+      .letter p {
+        color: var(--gray-dark);
+        margin-bottom: 1rem;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+
+      /* Responsive Quotes Section */
+      .quotes {
+        display: grid;
+        gap: 1rem;
+        margin: 2rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .quote-card {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      .quote-card p {
+        font-style: italic;
+        color: var(--gray-dark);
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+
+      /* Responsive Footer */
+      footer {
+        text-align: center;
+        padding: 2rem 0 1rem;
+        color: var(--purple-medium);
+      }
+
+      footer p:first-child {
+        margin-bottom: 0.5rem;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+
+      footer p:last-child {
+        font-size: clamp(0.8rem, 2vw, 0.875rem);
+      }
+
+      /* Balloons - Responsive Sizing */
+      .balloon {
+        position: absolute;
+        width: clamp(30px, 5vw, 50px);
+        height: clamp(36px, 6vw, 60px);
+        border-radius: 50%;
+        opacity: 0.8;
+        z-index: 10;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .balloon:hover {
+        transform: scale(1.1) !important;
+      }
+
+      .balloon-string {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: clamp(24px, 4vw, 32px);
+        background-color: var(--gray-medium);
+      }
+
+      /* Animation */
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(var(--rotate-start));
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-120vh) rotate(var(--rotate-end));
+          opacity: 0.8;
+        }
+      }
+
+      /* Extra Small Devices (phones, 600px and down) */
+      @media only screen and (max-width: 600px) {
+        body {
+          padding: 0.5rem;
+        }
+        .container {
+          padding: 0 0.5rem;
+        }
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Small Devices (portrait tablets and large phones, 600px and up) */
+      @media only screen and (min-width: 600px) {
+        .gallery {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Medium Devices (landscape tablets, 768px and up) */
+      @media only screen and (min-width: 768px) {
+        body {
+          padding: 1.5rem;
+        }
+        .letter {
+          padding: 2rem;
+        }
+      }
+
+      /* Large Devices (laptops/desktops, 992px and up) */
+      @media only screen and (min-width: 992px) {
+        .quotes {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Extra Large Devices (large laptops and desktops, 1200px and up) */
+      @media only screen and (min-width: 1200px) {
+        .container {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Balloons will be inserted here by JavaScript -->
+
+    <div class="container">
+      <header>
+        <h1>For My Amazing Best Friend</h1>
+        <p>You're the best thing that ever happened to me</p>
+      </header>
+
+      <main>
+        <!-- Photo Gallery -->
+        <div class="gallery">
+          <div class="gallery-item">
+            <img src="images/ab.jpg" alt="Memory with best friend" />
+          </div>
+          <div class="gallery-item">
+            <img src="images/bb.jpg" alt="Memory with best friend" />
+          </div>
+          <div class="gallery-item">
+            <img src="images/bc.jpg" alt="Memory with best friend" />
+          </div>
+        </div>
+
+        <!-- Letter Section -->
+        <section class="letter">
+          <h2>Dear Nigro,</h2>
+          <p>
+            I wanted to create this little space to remind you how much you mean
+            to me. Through all the laughter, the tears, and the countless
+            memories we've shared, you've been my rock, my partner in crime, and
+            my favorite person.
+          </p>
+          <p>
+            Remember when we stayed together? That's just one of the million
+            reasons why I'm so grateful to have you in my life.
+          </p>
+          <p>
+            No matter where life takes us, I'll always be here for you - just
+            like you've always been there for me.
+          </p>
+        </section>
+
+        <!-- Friendship Quotes -->
+        <section class="quotes">
+          <div class="quote-card">
+            <p>
+              "A real friend is one who walks in when the rest of the world
+              walks out."
+            </p>
+          </div>
+          <div class="quote-card">
+            <p>
+              "Friendship is born at that moment when one person says to
+              another, 'What! You too? I thought I was the only one.'"
+            </p>
+          </div>
+          <div class="quote-card">
+            <p>
+              "Good friends are like stars. You don't always see them, but you
+              know they're always there."
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>Made with ♥ for the world's best friend</p>
+        <p>Forever grateful for you</p>
+      </footer>
+    </div>
+
+    <script>
+      // Enhanced balloon creation with responsive sizing
+      function createBalloons() {
+        const colors = [
+          "#ff9ff3",
+          "#feca57",
+          "#ff6b6b",
+          "#48dbfb",
+          "#1dd1a1",
+          "#f368e0",
+          "#ff9f43",
+          "#ee5253",
+          "#0abde3",
+          "#10ac84",
+          "#00d2d3",
+          "#54a0ff",
+          "#5f27cd",
+          "#01a3a4",
+          "#ff9ff3",
+        ];
+
+        // Adjust number of balloons based on screen size
+        const balloonCount = window.innerWidth < 600 ? 20 : 30;
+
+        for (let i = 0; i < balloonCount; i++) {
+          const balloon = document.createElement("div");
+          balloon.className = "balloon";
+
+          // Random properties
+          const left = Math.random() * 100;
+          const speed = 5 + Math.random() * 10;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const delay = Math.random() * 5;
+          const rotateStart = Math.random() * 20 - 10;
+          const rotateEnd = Math.random() * 20 - 10;
+          const startPosition = 100 + Math.random() * 20;
+
+          // Set styles
+          balloon.style.left = `${left}%`;
+          balloon.style.top = `${startPosition}%`;
+          balloon.style.background = color;
+          balloon.style.animation = `floatUp ${speed}s linear infinite`;
+          balloon.style.animationDelay = `${delay}s`;
+          balloon.style.setProperty("--rotate-start", `${rotateStart}deg`);
+          balloon.style.setProperty("--rotate-end", `${rotateEnd}deg`);
+
+          // Add string
+          const string = document.createElement("div");
+          string.className = "balloon-string";
+          balloon.appendChild(string);
+
+          // Add click event
+          balloon.addEventListener("click", function () {
+            this.style.opacity = "0";
+            this.style.transform = "scale(0)";
+            setTimeout(() => {
+              this.style.opacity = "0.8";
+              this.style.transform = "";
+              this.style.left = `${Math.random() * 100}%`;
+              this.style.top = `${100 + Math.random() * 20}%`;
+            }, 2000);
+          });
+
+          document.body.appendChild(balloon);
+        }
+      }
+
+      // Handle window resize
+      function handleResize() {
+        const balloons = document.querySelectorAll(".balloon");
+        balloons.forEach((balloon) => balloon.remove());
+        createBalloons();
+      }
+
+      // Create balloons when page loads and on resize
+      window.addEventListener("load", createBalloons);
+      window.addEventListener("resize", handleResize);
+    </script>
+  </body>
+</html>
